@@ -1,53 +1,61 @@
-$(document).on('pageinit', '#home', function(){
-  var url = 'https://api.themoviedb.org/3/',
-     mode = 'search/movie?',
-     movieName = '&query=Superman',
-     key = 'api_key=15e0b039102ad3deb32fd12cbe96d0f1'
-     language = '&language=en-US';
+$(document).on('pageinit', '#home', function() {
+    var url = 'https://jquery-project-28037.firebaseio.com/.json';
 
     $.ajax({
-        url: url + mode + key + movieName ,
-        dataType: "jsonp",
+        url: url,
+        dataType: "json",
         async: true,
-        success: function (result) {
-            ajax.parseJSONP(result);
+        success: function(result) {
+            ajax.parseJSON(result);
         },
-        error: function (request,error) {
+        error: function(request, error) {
             alert('Network error has occurred please try again!');
         }
     });
 });
 
-$(document).on('pagebeforeshow', '#headline', function(){
+$(document).on('pagebeforeshow', '#headline', function() {
     $('#movie-data').empty();
-    $.each(movieInfo.result, function(i, row) {
-        if(row.id == movieInfo.id) {
-            $('#movie-data').append('<li><img src="https://image.tmdb.org/t/p/w185'+row.poster_path+'"></li>');
-            $('#movie-data').append('<li>Title: '+row.original_title+'</li>');
-            $('#movie-data').append('<li>Release date: '+row.release_date+'</li>');
-            $('#movie-data').append('<li>Popularity: '+row.popularity+'</li>');
-            $('#movie-data').append('<li>Average : '+row.vote_average+'</li>');
+    $('#scenario-title').empty();
+    $.each(movieInfo.scenario, function(i, row) {
+        if (row.name == movieInfo.name) {
+            $('#scenario-title').append('<h3>' + row.name + '</h3>');
+            $('#movie-data').append('<img src=' + row.image + '>');
+            $('#movie-data').append('<li><div id="accordion"><h3>' + row.p1.english + '</h3><div><p>' + row.p1.french + '</p></div></div></li>');
+            $('#movie-data').append('<li><div id="accordion"><h3>' + row.p2.english + '</h3><div><p>' + row.p2.french + '</p></div></div></li>');
+            $('#movie-data').append('<li><div id="accordion"><h3>' + row.p3.english + '</h3><div><p>' + row.p3.french + '</p></div></div></li>');
+            $('#movie-data').append('<li><div id="accordion"><h3>' + row.p4.english + '</h3><div><p>' + row.p4.french + '</p></div></div></li>');
+            $('#movie-data').append('<li><div id="accordion"><h3>' + row.p5.english + '</h3><div><p>' + row.p5.french + '</p></div></div></li>');
             $('#movie-data').listview('refresh');
         }
     });
 });
 
-$(document).on('vclick', '#movie-list li a', function(){
-    movieInfo.id = $(this).attr('data-id');
-    $.mobile.changePage( "#headline", { transition: "slide", changeHash: false });
+$(function() {
+    $("#accordion").accordion({
+        collapsible: true
+    });
+});
+
+$(document).on('vclick', '#movie-list li a', function() {
+    movieInfo.name = $(this).attr('data-id');
+    $.mobile.changePage("#headline", {
+        transition: "slide",
+        changeHash: false
+    });
 });
 
 var movieInfo = {
-    id : null,
-    result : null
+    name: null,
+    scenario: null
 }
 
 var ajax = {
-    parseJSONP:function(result){
-        movieInfo.result = result.results;
-        $.each(result.results, function(i, row) {
+    parseJSON: function(result) {
+        movieInfo.scenario = result.scenarios;
+        $.each(result.scenarios, function(i, row) {
             console.log(JSON.stringify(row));
-            $('#movie-list').append('<li><a href="" data-id="' + row.id + '"><img src="https://image.tmdb.org/t/p/w185'+row.poster_path+'"/><h3>' + row.title + '</h3><p>' + row.vote_average + '/10</p></a></li>');
+            $('#movie-list').append('<li><a href="" data-id="' + row.name + '"><img src= "' + row.image + '"><h3>' + row.name + '</h3></a></li>');
         });
         $('#movie-list').listview('refresh');
     }
