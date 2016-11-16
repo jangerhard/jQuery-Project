@@ -8,13 +8,17 @@ var config = {
 };
 firebase.initializeApp(config);
 
-var dbRef = firebase.database().ref().child('welcome');
+var dbRef = firebase.database().ref();
 
 $(document).on('pageinit', '#home', function() {
 
     var welcomeText = document.getElementById('welcomeText');
-    dbRef.on('value', snap => welcomeText.innerText = snap.val());
-
+    var footerText = document.getElementById('footerText');
+    dbRef.on('value', snap => {
+        welcomeText.innerText = snap.val().welcome;
+        footerText.innerText = snap.val().footer;
+    });
+    
     var url = 'https://jquery-project-28037.firebaseio.com/.json';
 
     $.ajax({
