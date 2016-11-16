@@ -17,23 +17,31 @@ $(document).on('pageinit', '#home', function() {
 $(document).on('pagebeforeshow', '#headline', function() {
     $('#movie-data').empty();
     $('#scenario-title').empty();
+    $('#q1_h').empty();
+    $('#q1').empty();
+    $('#q2_h').empty();
+    $('#q2').empty();
+    $('#q3_h').empty();
+    $('#q3').empty();
+    $('#q4_h').empty();
+    $('#q4').empty();
+    $('#q5_h').empty();
+    $('#q5').empty();
     $.each(movieInfo.scenario, function(i, row) {
         if (row.name == movieInfo.name) {
             $('#scenario-title').append('<h3>' + row.name + '</h3>');
-            $('#movie-data').append('<img src=' + row.image + '>');
-            $('#movie-data').append('<li><div id="accordion"><h3>' + row.p1.english + '</h3><div><p>' + row.p1.french + '</p></div></div></li>');
-            $('#movie-data').append('<li><div id="accordion"><h3>' + row.p2.english + '</h3><div><p>' + row.p2.french + '</p></div></div></li>');
-            $('#movie-data').append('<li><div id="accordion"><h3>' + row.p3.english + '</h3><div><p>' + row.p3.french + '</p></div></div></li>');
-            $('#movie-data').append('<li><div id="accordion"><h3>' + row.p4.english + '</h3><div><p>' + row.p4.french + '</p></div></div></li>');
-            $('#movie-data').append('<li><div id="accordion"><h3>' + row.p5.english + '</h3><div><p>' + row.p5.french + '</p></div></div></li>');
-            $('#movie-data').listview('refresh');
+            $('#scenario-title').append('<img src=' + row.image + '>');
+            $('#q1_h').append(row.p1.english);
+            $('#q1').append('<p>' + row.p1.french + '</p>');
+            $('#q2_h').append(row.p2.english);
+            $('#q2').append('<p>' + row.p2.french + '</p>');
+            $('#q3_h').append(row.p3.english);
+            $('#q3').append('<p>' + row.p3.french + '</p>');
+            $('#q4_h').append(row.p4.english);
+            $('#q4').append('<p>' + row.p4.french + '</p>');
+            $('#q5_h').append(row.p5.english);
+            $('#q5').append('<p>' + row.p5.french + '</p>');
         }
-    });
-});
-
-$(function() {
-    $("#accordion").accordion({
-        collapsible: true
     });
 });
 
