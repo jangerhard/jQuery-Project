@@ -16,6 +16,8 @@
 
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+    <script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
+
     <script>
         $(function() {
             $("#accordion").accordion({
@@ -28,9 +30,10 @@
 </head>
 
 <body>
+
     <div data-role="page" id="home">
         <div data-theme="a" data-role="header">
-            <h3>Learn English!</h3>
+              <h3 id="welcomeText"></h3>
         </div>
         <div data-role="content">
             <div class="example-wrapper" data-iscroll>
@@ -46,32 +49,42 @@
     <div data-role="page" id="headline">
         <div data-theme="a" data-role="header">
             <a href="#home" class="ui-btn-left" data-transition="slide" data-direction="reverse">Back</a>
-            <h3>Learn phrases!</h3>
+            <h3 id="scenarioTitle"></h3>
         </div>
         <div data-role="content">
-            <div id="scenario-title" data-role="collapsible" align="center">
+            <div id="scenarioImage" data-role="collapsible" align="center">
 
             </div>
             <div id="accordion">
                 <h3 id="q1_h"> </h3>
-                <div id="q1">
+                <div>
+                  <p id="q1" >
 
+                  </p>
                 </div>
                 <h3 id="q2_h"> </h3>
-                <div id="q2">
+                <div>
+                  <p id="q2" >
 
+                  </p>
                 </div>
                 <h3 id="q3_h"> </h3>
-                <div id="q3">
+                <div>
+                  <p id="q3" >
 
+                  </p>
                 </div>
                 <h3 id="q4_h"> </h3>
-                <div id="q4">
+                <div>
+                  <p id="q4" >
 
+                  </p>
                 </div>
                 <h3 id="q5_h"> </h3>
-                <div id="q5">
+                <div>
+                  <p id="q5" >
 
+                  </p>
                 </div>
             </div>
 

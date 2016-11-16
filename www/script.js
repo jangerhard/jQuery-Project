@@ -1,4 +1,20 @@
+// Initialize Firebase
+var config = {
+    apiKey: "AIzaSyCFoaziF96crxMBaVGiYUHdouDys_zXt8k",
+    authDomain: "jquery-project-28037.firebaseapp.com",
+    databaseURL: "https://jquery-project-28037.firebaseio.com",
+    storageBucket: "jquery-project-28037.appspot.com",
+    messagingSenderId: "980728597455"
+};
+firebase.initializeApp(config);
+
+var dbRef = firebase.database().ref().child('welcome');
+
 $(document).on('pageinit', '#home', function() {
+
+    var welcomeText = document.getElementById('welcomeText');
+    dbRef.on('value', snap => welcomeText.innerText = snap.val());
+
     var url = 'https://jquery-project-28037.firebaseio.com/.json';
 
     $.ajax({
@@ -15,8 +31,8 @@ $(document).on('pageinit', '#home', function() {
 });
 
 $(document).on('pagebeforeshow', '#headline', function() {
-    $('#movie-data').empty();
-    $('#scenario-title').empty();
+    $('#scenarioTitle').empty();
+    $('#scenarioImage').empty();
     $('#q1_h').empty();
     $('#q1').empty();
     $('#q2_h').empty();
@@ -29,8 +45,8 @@ $(document).on('pagebeforeshow', '#headline', function() {
     $('#q5').empty();
     $.each(movieInfo.scenario, function(i, row) {
         if (row.name == movieInfo.name) {
-            $('#scenario-title').append('<h3>' + row.name + '</h3>');
-            $('#scenario-title').append('<img src=' + row.image + '>');
+            $('#scenarioTitle').append(row.name);
+            $('#scenarioImage').append('<img src=' + row.image + '>');
             $('#q1_h').append(row.p1.english);
             $('#q1').append('<p>' + row.p1.french + '</p>');
             $('#q2_h').append(row.p2.english);
