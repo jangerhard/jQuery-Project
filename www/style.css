@@ -12,17 +12,17 @@
 
 .decorateQuetion{
 	background-color: #9FA8DA;
-	padding: 20px;
+	padding: 10px;
 	border-radius: 5px 5px 0px 0px ;
 
 }
 .decorateAnswer{
 	background-color: #C5CAE9;
-	padding: 20px;
+	padding: 10px;
 	margin-top: -20px;
 	border-radius: 0px 0px 25px 25px;
 
 }
 .adjustPadding{
-	margin-bottom: 100px;
+	margin-bottom: 80px;
 }
